@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+
+
+
+
+<script>
+  function updateUrl(url) {
+    var div = document.getElementById('output');
+    div.innerHTML = '<a href="' + url + '">Got it!</a>';
+    document.getElementById("myForm").reset();
+   }
+  function updateUrl2(url) {
+    var div = document.getElementById('output2');
+    div.innerHTML = '<a href="' + url + '">Got it!</a>';
+   }
+  function getMondayMap(data){
+  	var div = document.getElementById('monday');
+  	var map = new google.visualization.Map(div);
+  	map.draw(data, {showTip:true});
+  }
+  function updateUrl3(info) {
+    var div = document.getElementById('output3');
+    div.innerHTML = info;
+   }
+  function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  function showPosition(position) {
+    positionText = position.coords.latitude + 
+    ", " + position.coords.longitude;
+    document.getElementById("location").value=positionText;
+  }
+function clearForm(formName){
+	document.getElementById(fromName).reset();
+}
+</script>
+
+<body width="400px" margin-left="auto" margin-right="auto" text-align="center" align="center" onload="google.script.run
+    .withSuccessHandler(updateUrl3)
+    .digest()">
+
+<form id="myForm" text-align="center" align="center" style="background-color:grey">
+  Work Type:
+  <select name="workType">
+    <option value="atWork">At Work</option>
+    <option value="offWork">Off Work</option>
+    <option value="startTask">Start Task</option>
+    <option value="endTask">End Task</option>
+  </select><br>
+  Description:<br>
+  <input name="Description" type="text" /><br>
+  Location:<br>
+  <input name="location" id="location" type="text" />
+  <button type="button" onclick=getLocation() name="Location">Get My Location</button><br>
+  <input type="button" value="Submit"
+      onclick="google.script.run
+          .withSuccessHandler(updateUrl)
+          .processForm(this.parentNode)";/>
+</form>
+<div style="background-color:grey">
+<br>
+<br>
+</div>
+<!--  <form id="thisWeek"align="center" style="background-color:grey">
+<input type="button" value="This week's hours" text="This week's hours"
+      onclick="google.script.run
+          .withSuccessHandler(updateUrl3)
+          .digest()" />
+          
+</form>-->
+
+<div id="output" text-align="center" align="center" style="background-color:grey"></div>
+<div id="output3" text-align="center" align="center" style="background-color:grey"></div>
+
+<div style="background-color:grey">
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+<form id="myForm2" text-align="center" align="center" style="background-color:grey">
+  Phone Call Log<br><br>
+  Customer:<br>
+  <input name="customer" type="text" /><br>
+  Description:<br>
+  <textarea name="description" id="description" rows="5" columns="200"></textarea><br>
+  <input type="button" value="Submit"
+      onclick="google.script.run
+          .withSuccessHandler(updateUrl2)
+          .processForm2(this.parentNode)" />
+</form>
+<div id="output2" text-align="center" align="center" style="background-color:grey"></div>
+
+<!--<form id="WeekButtons" text-align="center"  align="center" style="background-color:grey">
+	<input type="button" value="Monday"
+		onclick="google.script.run
+          .withSuccessHandler(getMondayMap)
+          .getMonday(this.parentNode)" />
+</form>
+<div id="monday" text-align="center" align="center" style="background-color:grey"></div>-->
+</body>
+
